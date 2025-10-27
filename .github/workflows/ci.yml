@@ -21,7 +21,18 @@ jobs:
         pip install -r requirements.txt
         pip install pytest
     
+    - name: Test imports
+      run: |
+        python -c "
+        try:
+            from src.inventory import Inventory
+            from src.product import Product
+            print('✅ All imports successful')
+        except Exception as e:
+            print('❌ Import error:', e)
+            exit(1)
+        "
+    
     - name: Run tests
       run: |
-        python -c "import pytest; print('Pytest version:', pytest.__version__)"
         python -m pytest tests/ -v
