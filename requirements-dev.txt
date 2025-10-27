@@ -4,9 +4,18 @@ pytest-cov==4.1.0
 pytest-mock==3.11.1
 
 # Code Quality
-flake8==6.0.0
 black==23.7.0
+flake8==6.0.0
 mypy==1.5.0
 
 # Security
 bandit==1.7.5
+
+# Documentation
+pdoc==14.4.0
+
+# Build
+build==1.0.3
+
+# Development
+pre-commit==3.3.3
