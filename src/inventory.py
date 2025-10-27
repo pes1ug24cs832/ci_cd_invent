@@ -11,12 +11,16 @@ class Inventory:
     
     def _ensure_data_dir(self):
         """Ensure data directory exists"""
-        os.makedirs(os.path.dirname(self.data_file), exist_ok=True)
-        os.makedirs('logs', exist_ok=True)
+        try:
+            if self.data_file and os.path.dirname(self.data_file):
+                os.makedirs(os.path.dirname(self.data_file), exist_ok=True)
+        except (TypeError, OSError):
+            # Handle cases like ":memory:" or empty strings
+            pass
     
     def _load_data(self) -> Dict:
         """Load inventory data from JSON file"""
-        if os.path.exists(self.data_file):
+        if self.data_file and os.path.exists(self.data_file):
             try:
                 with open(self.data_file, 'r') as f:
                     return json.load(f)
@@ -26,6 +30,9 @@ class Inventory:
     
     def _save_data(self):
         """Save inventory data to JSON file"""
+        if not self.data_file or self.data_file == ":memory:":
+            return True  # Skip saving for in-memory databases
+            
         try:
             with open(self.data_file, 'w') as f:
                 json.dump(self.products, f, indent=2)
@@ -33,6 +40,7 @@ class Inventory:
         except IOError:
             return False
     
+    # ... rest of the methods remain the same ...
     def add_product(self, product) -> bool:
         """Add a new product to inventory"""
         if product.sku in self.products:

@@ -14,8 +14,13 @@ def test_imports():
 def test_inventory_creation():
     """Test Inventory class creation"""
     from src.inventory import Inventory
-    inventory = Inventory(":memory:")
+    # Use a valid file path instead of ":memory:"
+    inventory = Inventory("test_inventory.json")
     assert inventory is not None
+    # Clean up
+    import os
+    if os.path.exists("test_inventory.json"):
+        os.remove("test_inventory.json")
 
 def test_product_creation():
     """Test Product class creation"""
