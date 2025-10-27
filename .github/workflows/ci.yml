@@ -92,6 +92,7 @@ jobs:
 
     - name: Run type checking with mypy
       run: |
+        pip install types-tabulate types-click
         mypy src/ --ignore-missing-imports
 
   security:
