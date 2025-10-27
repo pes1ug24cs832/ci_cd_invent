@@ -1,6 +1,14 @@
 class Product:
-    def __init__(self, name: str, sku: str, price: float, quantity: int, 
-                 category: str = "General", description: str = "", supplier: str = ""):
+    def __init__(
+        self,
+        name: str,
+        sku: str,
+        price: float,
+        quantity: int,
+        category: str = "General",
+        description: str = "",
+        supplier: str = "",
+    ):
         self.name = name
         self.sku = sku
         self.price = price
@@ -8,7 +16,7 @@ class Product:
         self.category = category
         self.description = description
         self.supplier = supplier
-        
+
         # Validate data
         if price < 0:
             raise ValueError("Price cannot be negative")
